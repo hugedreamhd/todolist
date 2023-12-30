@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todolist/create_screen.dart';
 import 'package:todolist/main.dart';
 import 'package:todolist/todo.dart';
+import 'package:todolist/todo_item.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
@@ -37,10 +38,7 @@ class _ListScreenState extends State<ListScreen> {
       body: ListView(
         //List있는 값을 변환해서 표현할때는 map 함수를 쓰면 된다
         children: todos.values
-            .map((todo) => ListTile(
-                  title: Text(todo.title),
-                  subtitle: Text('${todo.dateTime}'), //int라 String으로 바꾸려고
-                ))
+            .map((todo) => TodoItem(todo:todo))
             .toList(), //Iterable로 반환되서 List형태로 바꿔줘야한다
       ),
       floatingActionButton: FloatingActionButton(
