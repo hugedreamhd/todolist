@@ -45,7 +45,12 @@ class _ListScreenState extends State<ListScreen> {
                     todo.isDone = !todo.isDone;
                     await todo.save();
 
-                    setState(() {});//await todo.save를 기달려서 다 되면 갱신
+                    setState(() {}); //await todo.save를 기달려서 다 되면 갱신
+                  },
+                  onDelete: (todo) async {
+                    await todo.delete();
+
+                    setState(() {});
                   },
                 ))
             .toList(), //Iterable로 반환되서 List형태로 바꿔줘야한다

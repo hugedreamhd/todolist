@@ -5,9 +5,14 @@ import 'package:todolist/todo.dart';
 class TodoItem extends StatelessWidget {
   final Todo todo;
   final Function(Todo) onTap;
+  final Function(Todo) onDelete; //메모 내용 지워지는 콜백
 
-  const TodoItem({Key? key, required this.todo, required this.onTap})
-      : super(key: key);
+  const TodoItem({
+    Key? key,
+    required this.todo,
+    required this.onTap,
+    required this.onDelete,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +31,19 @@ class TodoItem extends StatelessWidget {
       ),
       subtitle: Text(
         DateFormat.yMMMd()
-            .format(DateTime.fromMicrosecondsSinceEpoch(todo.dateTime)), //flutter pub add intl 패키지 이용
+            .format(DateTime.fromMicrosecondsSinceEpoch(todo.dateTime)),
+        //flutter pub add intl 패키지 이용
         style: TextStyle(color: todo.isDone ? Colors.grey : Colors.black),
-      ), //int라 String으로 바꾸려고
+      ),
+      //int라 String으로 바꾸려고
+      trailing: todo.isDone
+          ? GestureDetector(
+              onTap: () {
+                onDelete(todo);
+              },
+              child: const Icon(Icons.delete_forever),
+            )
+          : null, //뒤 영역
     );
   }
 }
