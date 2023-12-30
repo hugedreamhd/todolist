@@ -38,7 +38,16 @@ class _ListScreenState extends State<ListScreen> {
       body: ListView(
         //List있는 값을 변환해서 표현할때는 map 함수를 쓰면 된다
         children: todos.values
-            .map((todo) => TodoItem(todo:todo))
+            .map((e) => TodoItem(
+                  todo: e,
+                  onTap: (todo) async {
+                    //이 todo는 todo.dart에서 온 todo, 결국 e와 todo는 같은 값이다
+                    todo.isDone = !todo.isDone;
+                    await todo.save();
+
+                    setState(() {});//await todo.save를 기달려서 다 되면 갱신
+                  },
+                ))
             .toList(), //Iterable로 반환되서 List형태로 바꿔줘야한다
       ),
       floatingActionButton: FloatingActionButton(
@@ -48,7 +57,6 @@ class _ListScreenState extends State<ListScreen> {
             context,
             MaterialPageRoute(builder: (context) => const CreateScreen()),
           );
-
 
           setState(() {});
         },
