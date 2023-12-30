@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todolist/todo.dart';
 
 class TodoItem extends StatelessWidget {
@@ -24,7 +25,8 @@ class TodoItem extends StatelessWidget {
         style: TextStyle(color: todo.isDone ? Colors.grey : Colors.black),
       ),
       subtitle: Text(
-        '${todo.dateTime}',
+        DateFormat.yMMMd()
+            .format(DateTime.fromMicrosecondsSinceEpoch(todo.dateTime)), //flutter pub add intl 패키지 이용
         style: TextStyle(color: todo.isDone ? Colors.grey : Colors.black),
       ), //int라 String으로 바꾸려고
     );
