@@ -15,11 +15,17 @@ class Todo extends HiveObject {
   @HiveField(2)
   int dateTime; // int 값으로 저장하고 변환해서 표시해보자
 
+  @HiveField(3)
+  bool isDone;//완료를 했는지 안했는지 알수 있는 상태값을 알려줘야한다
+
   Todo({
     required this.title,
     required this.dateTime,
+    this.isDone= false, // 초기화 기본값
   }); //필수 생성자(named parameter)
 }
+
+
 
 //Todo('내용', 123123)
 //좀 더 플러터 스럽게는
