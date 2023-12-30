@@ -44,11 +44,14 @@ class _ListScreenState extends State<ListScreen> {
             .toList(), //Iterable로 반환되서 List형태로 바꿔줘야한다
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          await Navigator.push(
+            //push도 future 타입 - 돌아올때까지 기다릴수 있는 함수
             context,
             MaterialPageRoute(builder: (context) => const CreateScreen()),
           );
+
+          setState(() {});
         },
         child: const Icon(Icons.add),
       ),
