@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:todolist/si_dialog.dart';
 import 'package:todolist/todo.dart';
 
 class TodoItem extends StatelessWidget {
@@ -38,8 +39,15 @@ class TodoItem extends StatelessWidget {
       //int라 String으로 바꾸려고
       trailing: todo.isDone
           ? GestureDetector(
-              onTap: () {
-                onDelete(todo);
+              onTap: () async {
+                // 여기서 지울지 말지 체크
+                // 여기서 상인다이얼로그를 불렀잖아요?
+                // todo_item이라는 친구가 상인다이얼로그한테 물었죠.
+                // 진짜 삭제 할꺼냐?
+                // 그럼 상인 다이얼로그가 예 아니오로 답변을 주는 식.
+                // 상인다이얼로그가 "답변 해준 값"이 isDelete에 담기는 형식입니다.
+                bool? isDelete =  await siDialog(context, '삭제', '정말 삭제할까요?', false);
+                if(isDelete!) onDelete(todo);
               },
               child: const Icon(Icons.delete_forever),
             )

@@ -22,7 +22,13 @@ class _CreateScreenState extends State<CreateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todo 작성'),
+        backgroundColor: Colors.deepPurple,
+        title: Text(
+          '할일 작성',
+          style: TextStyle(
+            color: Colors.white70,
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () async {
@@ -39,7 +45,10 @@ class _CreateScreenState extends State<CreateScreen> {
                     context); //노랸 라인 - async 키워드가 있을 때 context 가 동작가능 한지 확인해봐라
               }
             },
-            icon: const Icon(Icons.done),
+            icon: const Icon(
+              Icons.done,
+              color: Colors.white70,
+            ),
           ),
         ],
       ),

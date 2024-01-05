@@ -33,27 +33,39 @@ class _ListScreenState extends State<ListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todo 리스트'),
+        backgroundColor: Colors.deepPurple,
+        title: const Text(
+          '해야할 일 목록 작성하기',
+          style: TextStyle(color: Colors.white70),
+        ),
       ),
-      body: ListView(
-        //List있는 값을 변환해서 표현할때는 map 함수를 쓰면 된다
-        children: todos.values
-            .map((e) => TodoItem(
-                  todo: e,
-                  onTap: (todo) async {
-                    //이 todo는 todo.dart에서 온 todo, 결국 e와 todo는 같은 값이다
-                    todo.isDone = !todo.isDone;
-                    await todo.save();
+      body: Container(
+        decoration: const BoxDecoration(
+         image: DecorationImage(
+           image: AssetImage('assets/img/note_image.png'),
+           fit: BoxFit.fill,
+         ),
+        ),
+        child: ListView(
+          //List있는 값을 변환해서 표현할때는 map 함수를 쓰면 된다
+          children: todos.values
+              .map((e) => TodoItem(
+                    todo: e,
+                    onTap: (todo) async {
+                      //이 todo는 todo.dart에서 온 todo, 결국 e와 todo는 같은 값이다
+                      todo.isDone = !todo.isDone;
+                      await todo.save();
 
-                    setState(() {}); //await todo.save를 기달려서 다 되면 갱신
-                  },
-                  onDelete: (todo) async {
-                    await todo.delete();
+                      setState(() {}); //await todo.save를 기달려서 다 되면 갱신
+                    },
+                    onDelete: (todo) async {
+                      await todo.delete();
 
-                    setState(() {});
-                  },
-                ))
-            .toList(), //Iterable로 반환되서 List형태로 바꿔줘야한다
+                      setState(() {});
+                    },
+                  ))
+              .toList(), //Iterable로 반환되서 List형태로 바꿔줘야한다
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
